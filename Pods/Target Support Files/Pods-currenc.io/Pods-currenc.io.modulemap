@@ -1,0 +1,6 @@
+framework module Pods_currenc_io {
+  umbrella header "Pods-currenc.io-umbrella.h"
+
+  export *
+  module * { export * }
+}

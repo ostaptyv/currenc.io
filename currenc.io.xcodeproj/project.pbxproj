@@ -3,23 +3,29 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C4CD542180ADF5801369FAD /* Pods_currenc_io.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23286FB123002FA6A2D5EDA1 /* Pods_currenc_io.framework */; };
 		84D1A5462435F7A8000C0B02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1A5452435F7A8000C0B02 /* AppDelegate.swift */; };
 		84D1A5482435F7A8000C0B02 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1A5472435F7A8000C0B02 /* SceneDelegate.swift */; };
 		84D1A54F2435F7B1000C0B02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D1A54E2435F7B1000C0B02 /* Assets.xcassets */; };
 		84D1A5522435F7B1000C0B02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D1A5502435F7B1000C0B02 /* LaunchScreen.storyboard */; };
+		84D1A56C243610AD000C0B02 /* CurrencyRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1A56B243610AD000C0B02 /* CurrencyRateViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23286FB123002FA6A2D5EDA1 /* Pods_currenc_io.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_currenc_io.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D1A5422435F7A8000C0B02 /* currenc.io.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = currenc.io.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D1A5452435F7A8000C0B02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84D1A5472435F7A8000C0B02 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		84D1A54E2435F7B1000C0B02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84D1A5512435F7B1000C0B02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84D1A5532435F7B1000C0B02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84D1A56B243610AD000C0B02 /* CurrencyRateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRateViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
+		9F3A8C28DA21263A3A1A2844 /* Pods-currenc.io.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-currenc.io.release.xcconfig"; path = "Target Support Files/Pods-currenc.io/Pods-currenc.io.release.xcconfig"; sourceTree = "<group>"; };
+		B6CCEB788CAB5A0D42712126 /* Pods-currenc.io.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-currenc.io.debug.xcconfig"; path = "Target Support Files/Pods-currenc.io/Pods-currenc.io.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,17 +33,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C4CD542180ADF5801369FAD /* Pods_currenc_io.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BF4CE6178F6FDD0FE88440D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B6CCEB788CAB5A0D42712126 /* Pods-currenc.io.debug.xcconfig */,
+				9F3A8C28DA21263A3A1A2844 /* Pods-currenc.io.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		393108C9D754DF2E4BB05135 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				23286FB123002FA6A2D5EDA1 /* Pods_currenc_io.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		84D1A5392435F7A7000C0B02 = {
 			isa = PBXGroup;
 			children = (
 				84D1A5442435F7A8000C0B02 /* currenc.io */,
 				84D1A5432435F7A8000C0B02 /* Products */,
+				1BF4CE6178F6FDD0FE88440D /* Pods */,
+				393108C9D754DF2E4BB05135 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,6 +78,9 @@
 		84D1A5442435F7A8000C0B02 /* currenc.io */ = {
 			isa = PBXGroup;
 			children = (
+				84D1A56A24361095000C0B02 /* Models */,
+				84D1A5692436108D000C0B02 /* Views */,
+				84D1A56824361078000C0B02 /* View Models */,
 				84D1A55A2435F82E000C0B02 /* System delegates */,
 				84D1A5592435F824000C0B02 /* Supporting files */,
 			);
@@ -77,6 +106,28 @@
 			path = "System delegates";
 			sourceTree = "<group>";
 		};
+		84D1A56824361078000C0B02 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		84D1A5692436108D000C0B02 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				84D1A56B243610AD000C0B02 /* CurrencyRateViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		84D1A56A24361095000C0B02 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -84,9 +135,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84D1A5562435F7B1000C0B02 /* Build configuration list for PBXNativeTarget "currenc.io" */;
 			buildPhases = (
+				2C8C2780505B7C8CA0CA0F85 /* [CP] Check Pods Manifest.lock */,
 				84D1A53E2435F7A7000C0B02 /* Sources */,
 				84D1A53F2435F7A7000C0B02 /* Frameworks */,
 				84D1A5402435F7A7000C0B02 /* Resources */,
+				41F08C8B686DE7E0EB8E89C2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -142,12 +195,55 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2C8C2780505B7C8CA0CA0F85 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-currenc.io-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		41F08C8B686DE7E0EB8E89C2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-currenc.io/Pods-currenc.io-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-currenc.io/Pods-currenc.io-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-currenc.io/Pods-currenc.io-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		84D1A53E2435F7A7000C0B02 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				84D1A5462435F7A8000C0B02 /* AppDelegate.swift in Sources */,
+				84D1A56C243610AD000C0B02 /* CurrencyRateViewController.swift in Sources */,
 				84D1A5482435F7A8000C0B02 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,6 +378,7 @@
 		};
 		84D1A5572435F7B1000C0B02 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6CCEB788CAB5A0D42712126 /* Pods-currenc.io.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +397,7 @@
 		};
 		84D1A5582435F7B1000C0B02 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F3A8C28DA21263A3A1A2844 /* Pods-currenc.io.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
