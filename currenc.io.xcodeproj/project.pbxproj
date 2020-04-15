@@ -8,15 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		3C4CD542180ADF5801369FAD /* Pods_currenc_io.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23286FB123002FA6A2D5EDA1 /* Pods_currenc_io.framework */; };
+		848DF5442440AF6E00444927 /* TimeframeButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DF5432440AF6E00444927 /* TimeframeButtonCollectionViewCell.swift */; };
+		84C23B3A2443674000C099B1 /* CurrencyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C23B392443674000C099B1 /* CurrencyInfoTableViewCell.swift */; };
 		84D1A5462435F7A8000C0B02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1A5452435F7A8000C0B02 /* AppDelegate.swift */; };
 		84D1A5482435F7A8000C0B02 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1A5472435F7A8000C0B02 /* SceneDelegate.swift */; };
 		84D1A54F2435F7B1000C0B02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D1A54E2435F7B1000C0B02 /* Assets.xcassets */; };
 		84D1A5522435F7B1000C0B02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D1A5502435F7B1000C0B02 /* LaunchScreen.storyboard */; };
 		84D1A56C243610AD000C0B02 /* CurrencyRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1A56B243610AD000C0B02 /* CurrencyRateViewController.swift */; };
+		84F9877424374D05008A603D /* CurrencyRateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9877324374D05008A603D /* CurrencyRateCollectionViewCell.swift */; };
+		84F9877724375116008A603D /* Setuppable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9877624375116008A603D /* Setuppable.swift */; };
+		84F9877B24378610008A603D /* UIColor+HexInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9877A24378610008A603D /* UIColor+HexInit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		23286FB123002FA6A2D5EDA1 /* Pods_currenc_io.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_currenc_io.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		848DF5432440AF6E00444927 /* TimeframeButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeframeButtonCollectionViewCell.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		84C23B392443674000C099B1 /* CurrencyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyInfoTableViewCell.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		84D1A5422435F7A8000C0B02 /* currenc.io.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = currenc.io.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D1A5452435F7A8000C0B02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84D1A5472435F7A8000C0B02 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +31,9 @@
 		84D1A5512435F7B1000C0B02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84D1A5532435F7B1000C0B02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D1A56B243610AD000C0B02 /* CurrencyRateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRateViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
+		84F9877324374D05008A603D /* CurrencyRateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRateCollectionViewCell.swift; sourceTree = "<group>"; wrapsLines = 1; };
+		84F9877624375116008A603D /* Setuppable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setuppable.swift; sourceTree = "<group>"; };
+		84F9877A24378610008A603D /* UIColor+HexInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HexInit.swift"; sourceTree = "<group>"; };
 		9F3A8C28DA21263A3A1A2844 /* Pods-currenc.io.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-currenc.io.release.xcconfig"; path = "Target Support Files/Pods-currenc.io/Pods-currenc.io.release.xcconfig"; sourceTree = "<group>"; };
 		B6CCEB788CAB5A0D42712126 /* Pods-currenc.io.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-currenc.io.debug.xcconfig"; path = "Target Support Files/Pods-currenc.io/Pods-currenc.io.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,6 +88,7 @@
 		84D1A5442435F7A8000C0B02 /* currenc.io */ = {
 			isa = PBXGroup;
 			children = (
+				84F98778243785FA008A603D /* Extensions */,
 				84D1A56A24361095000C0B02 /* Models */,
 				84D1A5692436108D000C0B02 /* Views */,
 				84D1A56824361078000C0B02 /* View Models */,
@@ -117,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				84D1A56B243610AD000C0B02 /* CurrencyRateViewController.swift */,
+				84F9877224374CD7008A603D /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -126,6 +138,41 @@
 			children = (
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		84F9877224374CD7008A603D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				84F9877324374D05008A603D /* CurrencyRateCollectionViewCell.swift */,
+				848DF5432440AF6E00444927 /* TimeframeButtonCollectionViewCell.swift */,
+				84C23B392443674000C099B1 /* CurrencyInfoTableViewCell.swift */,
+				84F98775243750D7008A603D /* Protocols */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		84F98775243750D7008A603D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				84F9877624375116008A603D /* Setuppable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		84F98778243785FA008A603D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				84F98779243785FE008A603D /* UIColor */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		84F98779243785FE008A603D /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				84F9877A24378610008A603D /* UIColor+HexInit.swift */,
+			);
+			path = UIColor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,9 +289,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84F9877724375116008A603D /* Setuppable.swift in Sources */,
 				84D1A5462435F7A8000C0B02 /* AppDelegate.swift in Sources */,
+				84F9877424374D05008A603D /* CurrencyRateCollectionViewCell.swift in Sources */,
 				84D1A56C243610AD000C0B02 /* CurrencyRateViewController.swift in Sources */,
+				84C23B3A2443674000C099B1 /* CurrencyInfoTableViewCell.swift in Sources */,
 				84D1A5482435F7A8000C0B02 /* SceneDelegate.swift in Sources */,
+				84F9877B24378610008A603D /* UIColor+HexInit.swift in Sources */,
+				848DF5442440AF6E00444927 /* TimeframeButtonCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +436,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ALC5B8K55X;
 				INFOPLIST_FILE = "currenc.io/Supporting files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -403,6 +456,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = ALC5B8K55X;
 				INFOPLIST_FILE = "currenc.io/Supporting files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -66,7 +66,7 @@ class CurrencyRateViewController: UIViewController, UICollectionViewDataSource, 
         collectionView.dataSource = self
         collectionView.delegate = self
 
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: .collectionViewCellReuseIdentifier)
+        collectionView.register(CurrencyRateCollectionViewCell.self, forCellWithReuseIdentifier: .collectionViewCellReuseIdentifier)
         
         return collectionView
     }
@@ -155,7 +155,10 @@ class CurrencyRateViewController: UIViewController, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: .collectionViewCellReuseIdentifier, for: indexPath)
-        cell.backgroundColor = .green //
+        
+        if let setuppableCell = cell as? Setuppable {
+            setuppableCell.setupInstance()
+        }
         
         return cell
     }
@@ -169,6 +172,7 @@ class CurrencyRateViewController: UIViewController, UICollectionViewDataSource, 
 
 
 // MARK: - Constants
+
 fileprivate extension CGFloat {
     static let collectionViewMinimumLineSpacing: CGFloat = 20.0
     
@@ -191,7 +195,7 @@ fileprivate extension CGFloat {
 }
 
 fileprivate extension String {
-    static let collectionViewCellReuseIdentifier = "reuseID" // temporary value
+    static let collectionViewCellReuseIdentifier = String(describing: CurrencyRateCollectionViewCell.self)
 }
 
 fileprivate extension UIColor {
@@ -245,7 +249,7 @@ fileprivate extension UIColor {
     
     // MARK: Colors for light/dark styles
     static let mainViewBackgroungColorLight = UIColor.white
-    static let mainViewBackgroungColorDark = UIColor.black
+    static let mainViewBackgroungColorDark = UIColor(hex: "181B1F", alpha: 0.95)!
     
     static let pageControlIndicatorTintColorLight = UIColor(white: 0.0, alpha: 0.2)
     static let pageControlIndicatorTintColorDark = UIColor(white: 1.0, alpha: 0.2)
