@@ -8,13 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		3C4CD542180ADF5801369FAD /* Pods_currenc_io.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23286FB123002FA6A2D5EDA1 /* Pods_currenc_io.framework */; };
+		843AF0A124598C0000B60F63 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843AF0A024598C0000B60F63 /* Icons.xcassets */; };
+		843AF0A8245B01C600B60F63 /* Double+DecimalValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843AF0A7245B01C600B60F63 /* Double+DecimalValue.swift */; };
+		847296AB24487F6F00D8F910 /* CandlestickDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847296AA24487F6F00D8F910 /* CandlestickDataModel.swift */; };
+		847296AE2448992000D8F910 /* CPTScatterPlot+Subscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847296AD2448992000D8F910 /* CPTScatterPlot+Subscriber.swift */; };
 		848DF5442440AF6E00444927 /* TimeframeButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848DF5432440AF6E00444927 /* TimeframeButtonCollectionViewCell.swift */; };
+		849896D724648B7200128783 /* String+LocalizedError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849896D624648B7200128783 /* String+LocalizedError.swift */; };
+		84A6B48C2464710200441F9F /* AxisAdjustManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A6B48B2464710200441F9F /* AxisAdjustManager.swift */; };
+		84AA856824770606000474DF /* Divideable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA856724770606000474DF /* Divideable.swift */; };
+		84AA856A24770A63000474DF /* AxisValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA856924770A63000474DF /* AxisValue.swift */; };
+		84BEDA2A24473F240030570A /* CurrencyRateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEDA2924473F240030570A /* CurrencyRateViewModel.swift */; };
 		84C23B3A2443674000C099B1 /* CurrencyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C23B392443674000C099B1 /* CurrencyInfoTableViewCell.swift */; };
 		84D1A5462435F7A8000C0B02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1A5452435F7A8000C0B02 /* AppDelegate.swift */; };
 		84D1A5482435F7A8000C0B02 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1A5472435F7A8000C0B02 /* SceneDelegate.swift */; };
 		84D1A54F2435F7B1000C0B02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D1A54E2435F7B1000C0B02 /* Assets.xcassets */; };
 		84D1A5522435F7B1000C0B02 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D1A5502435F7B1000C0B02 /* LaunchScreen.storyboard */; };
 		84D1A56C243610AD000C0B02 /* CurrencyRateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D1A56B243610AD000C0B02 /* CurrencyRateViewController.swift */; };
+		84EF2CBB245056400076B634 /* TimeframeOptionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EF2CBA245056400076B634 /* TimeframeOptionProtocol.swift */; };
+		84EF2CBF245072CA0076B634 /* CurrencyDataDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EF2CBE245072CA0076B634 /* CurrencyDataDownloader.swift */; };
 		84F9877424374D05008A603D /* CurrencyRateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9877324374D05008A603D /* CurrencyRateCollectionViewCell.swift */; };
 		84F9877724375116008A603D /* Setuppable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9877624375116008A603D /* Setuppable.swift */; };
 		84F9877B24378610008A603D /* UIColor+HexInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9877A24378610008A603D /* UIColor+HexInit.swift */; };
@@ -22,7 +33,16 @@
 
 /* Begin PBXFileReference section */
 		23286FB123002FA6A2D5EDA1 /* Pods_currenc_io.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_currenc_io.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		843AF0A024598C0000B60F63 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
+		843AF0A7245B01C600B60F63 /* Double+DecimalValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+DecimalValue.swift"; sourceTree = "<group>"; };
+		847296AA24487F6F00D8F910 /* CandlestickDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandlestickDataModel.swift; sourceTree = "<group>"; };
+		847296AD2448992000D8F910 /* CPTScatterPlot+Subscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CPTScatterPlot+Subscriber.swift"; sourceTree = "<group>"; };
 		848DF5432440AF6E00444927 /* TimeframeButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeframeButtonCollectionViewCell.swift; sourceTree = "<group>"; wrapsLines = 0; };
+		849896D624648B7200128783 /* String+LocalizedError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+LocalizedError.swift"; sourceTree = "<group>"; };
+		84A6B48B2464710200441F9F /* AxisAdjustManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisAdjustManager.swift; sourceTree = "<group>"; };
+		84AA856724770606000474DF /* Divideable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divideable.swift; sourceTree = "<group>"; };
+		84AA856924770A63000474DF /* AxisValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisValue.swift; sourceTree = "<group>"; };
+		84BEDA2924473F240030570A /* CurrencyRateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRateViewModel.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		84C23B392443674000C099B1 /* CurrencyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyInfoTableViewCell.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		84D1A5422435F7A8000C0B02 /* currenc.io.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = currenc.io.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D1A5452435F7A8000C0B02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -31,6 +51,8 @@
 		84D1A5512435F7B1000C0B02 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84D1A5532435F7B1000C0B02 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D1A56B243610AD000C0B02 /* CurrencyRateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRateViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
+		84EF2CBA245056400076B634 /* TimeframeOptionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeframeOptionProtocol.swift; sourceTree = "<group>"; };
+		84EF2CBE245072CA0076B634 /* CurrencyDataDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDataDownloader.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		84F9877324374D05008A603D /* CurrencyRateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyRateCollectionViewCell.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		84F9877624375116008A603D /* Setuppable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setuppable.swift; sourceTree = "<group>"; };
 		84F9877A24378610008A603D /* UIColor+HexInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+HexInit.swift"; sourceTree = "<group>"; };
@@ -67,6 +89,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		843AF09F24598BE400B60F63 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				843AF0A024598C0000B60F63 /* Icons.xcassets */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		84AA856B247A7761000474DF /* Axis Adjust Manager */ = {
+			isa = PBXGroup;
+			children = (
+				84A6B48B2464710200441F9F /* AxisAdjustManager.swift */,
+			);
+			path = "Axis Adjust Manager";
+			sourceTree = "<group>";
+		};
 		84D1A5392435F7A7000C0B02 = {
 			isa = PBXGroup;
 			children = (
@@ -88,11 +126,14 @@
 		84D1A5442435F7A8000C0B02 /* currenc.io */ = {
 			isa = PBXGroup;
 			children = (
+				84AA856B247A7761000474DF /* Axis Adjust Manager */,
+				84F98775243750D7008A603D /* Protocols */,
 				84F98778243785FA008A603D /* Extensions */,
 				84D1A56A24361095000C0B02 /* Models */,
 				84D1A5692436108D000C0B02 /* Views */,
 				84D1A56824361078000C0B02 /* View Models */,
 				84D1A55A2435F82E000C0B02 /* System delegates */,
+				843AF09F24598BE400B60F63 /* Images */,
 				84D1A5592435F824000C0B02 /* Supporting files */,
 			);
 			path = currenc.io;
@@ -120,6 +161,8 @@
 		84D1A56824361078000C0B02 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				84BEDA2924473F240030570A /* CurrencyRateViewModel.swift */,
+				84EF2CBE245072CA0076B634 /* CurrencyDataDownloader.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -136,6 +179,7 @@
 		84D1A56A24361095000C0B02 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				847296AA24487F6F00D8F910 /* CandlestickDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -146,7 +190,6 @@
 				84F9877324374D05008A603D /* CurrencyRateCollectionViewCell.swift */,
 				848DF5432440AF6E00444927 /* TimeframeButtonCollectionViewCell.swift */,
 				84C23B392443674000C099B1 /* CurrencyInfoTableViewCell.swift */,
-				84F98775243750D7008A603D /* Protocols */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -155,6 +198,9 @@
 			isa = PBXGroup;
 			children = (
 				84F9877624375116008A603D /* Setuppable.swift */,
+				84EF2CBA245056400076B634 /* TimeframeOptionProtocol.swift */,
+				84AA856724770606000474DF /* Divideable.swift */,
+				84AA856924770A63000474DF /* AxisValue.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -162,17 +208,12 @@
 		84F98778243785FA008A603D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				84F98779243785FE008A603D /* UIColor */,
+				847296AD2448992000D8F910 /* CPTScatterPlot+Subscriber.swift */,
+				84F9877A24378610008A603D /* UIColor+HexInit.swift */,
+				843AF0A7245B01C600B60F63 /* Double+DecimalValue.swift */,
+				849896D624648B7200128783 /* String+LocalizedError.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		84F98779243785FE008A603D /* UIColor */ = {
-			isa = PBXGroup;
-			children = (
-				84F9877A24378610008A603D /* UIColor+HexInit.swift */,
-			);
-			path = UIColor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84D1A5522435F7B1000C0B02 /* LaunchScreen.storyboard in Resources */,
+				843AF0A124598C0000B60F63 /* Icons.xcassets in Resources */,
 				84D1A54F2435F7B1000C0B02 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,13 +332,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				84F9877724375116008A603D /* Setuppable.swift in Sources */,
+				84EF2CBF245072CA0076B634 /* CurrencyDataDownloader.swift in Sources */,
+				847296AB24487F6F00D8F910 /* CandlestickDataModel.swift in Sources */,
 				84D1A5462435F7A8000C0B02 /* AppDelegate.swift in Sources */,
 				84F9877424374D05008A603D /* CurrencyRateCollectionViewCell.swift in Sources */,
 				84D1A56C243610AD000C0B02 /* CurrencyRateViewController.swift in Sources */,
+				849896D724648B7200128783 /* String+LocalizedError.swift in Sources */,
+				84AA856A24770A63000474DF /* AxisValue.swift in Sources */,
 				84C23B3A2443674000C099B1 /* CurrencyInfoTableViewCell.swift in Sources */,
+				847296AE2448992000D8F910 /* CPTScatterPlot+Subscriber.swift in Sources */,
+				84AA856824770606000474DF /* Divideable.swift in Sources */,
 				84D1A5482435F7A8000C0B02 /* SceneDelegate.swift in Sources */,
+				843AF0A8245B01C600B60F63 /* Double+DecimalValue.swift in Sources */,
 				84F9877B24378610008A603D /* UIColor+HexInit.swift in Sources */,
+				84EF2CBB245056400076B634 /* TimeframeOptionProtocol.swift in Sources */,
+				84A6B48C2464710200441F9F /* AxisAdjustManager.swift in Sources */,
 				848DF5442440AF6E00444927 /* TimeframeButtonCollectionViewCell.swift in Sources */,
+				84BEDA2A24473F240030570A /* CurrencyRateViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
