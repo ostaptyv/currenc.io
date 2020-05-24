@@ -8,19 +8,19 @@
 
 import UIKit
 import CorePlot
+import Combine
 
-class CurrencyRateCollectionViewCell: UICollectionViewCell, Setuppable, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDataSource, CPTScatterPlotDataSource, CPTScatterPlotDelegate {
+class CurrencyRateCollectionViewCell: UICollectionViewCell, Setuppable, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDataSource {
     
-    enum TimeframeOption: String, CaseIterable {
-        case seconds15 = "15s"
-        case seconds30 = "30s"
-        case seconds60 = "60s"
-        case day = "Day"
-        case week = "Week"
-        case month = "Month"
-    }
+    var viewModel: CurrencyRateViewModel? = CurrencyRateViewModel()
+    private var cancellableSet = Set<AnyCancellable>()
     
-    private var currentTimeframeOption = TimeframeOption.seconds15
+    private var arrayOfClearDataPublishers = [AnyPublisher<Double, Never>]()
+    private var arrayOfPublisherNames = [String]()
+    
+    typealias TimeframeOptionType = CurrencyRateViewModel.TimeframeOption
+     
+    @Published private var currentTimeframeOption = TimeframeOptionType.defaultTimeframeOption
     
     private var scrollView: UIScrollView!
     private var scrollContentView: UIView!
@@ -42,11 +42,33 @@ class CurrencyRateCollectionViewCell: UICollectionViewCell, Setuppable, UICollec
     // MARK: - Setup cell
     
     func setupInstance() {
-        if !isInterfaceInitialized {
-            setupInterface()
-        }
+        guard !isInterfaceInitialized else { return }
         
-        let item = TimeframeOption.allCases.firstIndex(of: currentTimeframeOption)!
+        viewModel?.setupInstance()
+        setupInterface()
+        
+        selectDefaultTimeframeOption()
+        
+        guard let viewModel = viewModel else { return }
+        
+        arrayOfClearDataPublishers = [
+            viewModel.highPricePublisher,
+            viewModel.lowPricePublisher,
+            viewModel.openPricePublisher,
+            viewModel.closePricePublisher
+        ]
+        arrayOfPublisherNames = [
+            "High Price",
+            "Low Price",
+            "Open Price",
+            "Close Price"
+        ]
+        
+        $currentTimeframeOption.subscribe(viewModel.timeframeOptionSubject).store(in: &cancellableSet)
+    }
+    
+    private func selectDefaultTimeframeOption() {
+        let item = TimeframeOptionType.allCases.firstIndex(of: currentTimeframeOption)!
         let indexPath = IndexPath(item: item, section: 0)
         timeframeButtonsCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
     }
@@ -95,26 +117,37 @@ class CurrencyRateCollectionViewCell: UICollectionViewCell, Setuppable, UICollec
     
     private func makeCurrencyIconImageView() -> UIImageView {
         let currencyIconImageView = UIImageView()
+        currencyIconImageView.image = UIImage(named: .bitcoinIconName)
+        
         return currencyIconImageView
     }
     
     private func makeCurrencyTitleTextView() -> UITextView {
         let currencyTitleTextView = UITextView()
-        currencyTitleTextView.attributedText = makeCurrencyTitle()
         currencyTitleTextView.isScrollEnabled = false
         currencyTitleTextView.textContainerInset = .zero
         currencyTitleTextView.textContainer.maximumNumberOfLines = 0
         currencyTitleTextView.backgroundColor = .currencyTitleTextViewBackgroundColor
         
+        viewModel?.closePricePublisher
+            .map { (closePrice: Double) -> NSAttributedString in
+                let currencyPrice = String(format: "%.2f", closePrice)
+                
+                return self.makeCurrencyTitle(currencyName: "BTC / USDT", currencyPrice: currencyPrice)
+            }
+            .receive(on: RunLoop.main)
+            .assign(to: \.attributedText, on: currencyTitleTextView)
+            .store(in: &cancellableSet)
+        
         return currencyTitleTextView
     }
     
-    private func makeCurrencyTitle() -> NSAttributedString {
+    private func makeCurrencyTitle(currencyName: String, currencyPrice: String) -> NSAttributedString {
         let mutableAttributedString = NSMutableAttributedString()
         
-        let currencyNameString = NSAttributedString(string: .currencyNameString, attributes: [.font: UIFont.currencyNameFont, .foregroundColor: UIColor.currencyNameColor])
-        let currencyPriceString = NSAttributedString(string: .currencyPriceString, attributes: [.font: UIFont.currencyPriceFont, .foregroundColor: UIColor.currencyPriceColor])
-        let spaceBetweenTexts = NSAttributedString(string: .spaceBetweenTexts, attributes: [.font: UIFont.spaceBetweenTextsFont])
+        let currencyNameString = NSAttributedString(string: currencyName, attributes: [.font: UIFont.currencyNameFont, .foregroundColor: UIColor.currencyNameColor])
+        let currencyPriceString = NSAttributedString(string: currencyPrice, attributes: [.font: UIFont.currencyPriceFont, .foregroundColor: UIColor.currencyPriceColor])
+        let spaceBetweenTexts = NSAttributedString(string: "\n", attributes: [.font: UIFont.spaceBetweenTextsFont])
         
         mutableAttributedString.append(currencyNameString)
         mutableAttributedString.append(spaceBetweenTexts)
@@ -152,10 +185,12 @@ class CurrencyRateCollectionViewCell: UICollectionViewCell, Setuppable, UICollec
         let fill = CPTFill(color: fillColor)
         
         let plot = CPTScatterPlot()
-        plot.dataSource = self
         plot.dataLineStyle = lineStyle
         plot.areaFill = fill
         plot.areaBaseValue = NSNumber(cgFloat: .areaBaseValue)
+        
+        let dataSourceSubscriber = plot.dataSourceSubscriber(numberOfRecords: UInt(Double.graphXAxisMaxValue), plotSpace: plotSpace)
+        viewModel?.volumePublisher.receive(on: RunLoop.main).subscribe(dataSourceSubscriber)
         
         graph.add(plot)
         
@@ -172,16 +207,28 @@ class CurrencyRateCollectionViewCell: UICollectionViewCell, Setuppable, UICollec
     private func makeCurrencyChangeIndicatorLabel() -> UILabel {
         let currencyChangeIndicatorLabel = UILabel()
         currencyChangeIndicatorLabel.textColor = .currencyChangeIndicatorLabelTextColor
-        currencyChangeIndicatorLabel.text = .currencyChangeIndicatorLabelString
         currencyChangeIndicatorLabel.font = .currencyChangeIndicatorLabelFont
+        
+        viewModel?.percentagePublisher
+            .map { String(format: "%.4f %%", $0) }
+            .receive(on: RunLoop.main)
+            .assign(to: \.text, on: currencyChangeIndicatorLabel)
+            .store(in: &cancellableSet)
         
         return currencyChangeIndicatorLabel
     }
     
     private func makeCurrencyChangeIndicatorShape() -> UIView {
         let currencyChangeIndicatorShape = UIView()
-        currencyChangeIndicatorShape.backgroundColor = .currencyChangeIndicatorShapeBackgroundColor
         currencyChangeIndicatorShape.layer.cornerRadius = .currencyChangeIndicatorShapeCornerRadius
+        
+        viewModel?.isIncreasingPublisher
+            .map { isIncreasing -> UIColor in
+                return isIncreasing ? .currencyChangeIndicatorShapeGreenBackgroundColor : .currencyChangeIndicatorShapeRedBackgroundColor
+            }
+            .receive(on: RunLoop.main)
+            .assign(to: \.backgroundColor, on: currencyChangeIndicatorShape)
+            .store(in: &cancellableSet)
         
         return currencyChangeIndicatorShape
     }
@@ -350,8 +397,7 @@ class CurrencyRateCollectionViewCell: UICollectionViewCell, Setuppable, UICollec
         commonConstraints.append(contentsOf: [
             currencyChangeIndicatorShape.topAnchor.constraint(equalTo: currencyChangeIndicatorContainerView.topAnchor, constant: .currencyChangeIndicatorLabelTopAnchorValue),
             currencyChangeIndicatorShape.bottomAnchor.constraint(equalTo: currencyChangeIndicatorContainerView.bottomAnchor, constant: .currencyChangeIndicatorLabelBottomAnchorValue),
-            currencyChangeIndicatorShape.trailingAnchor.constraint(equalTo: currencyChangeIndicatorContainerView.trailingAnchor, constant: .currencyChangeIndicatorLabelTrailingAnchorValue),
-            currencyChangeIndicatorShape.heightAnchor.constraint(equalToConstant: .currencyChangeIndicatorLabelHeightAnchorValue)
+            currencyChangeIndicatorShape.trailingAnchor.constraint(equalTo: currencyChangeIndicatorContainerView.trailingAnchor, constant: .currencyChangeIndicatorLabelTrailingAnchorValue)
         ])
     }
     
@@ -402,13 +448,13 @@ class CurrencyRateCollectionViewCell: UICollectionViewCell, Setuppable, UICollec
     // MARK: - Collection view data source
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return TimeframeOption.allCases.count
+        return TimeframeOptionType.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: .timeframeButtonCellReuseIdentifier, for: indexPath) as! TimeframeButtonCollectionViewCell
         cell.setupInstance()
-        cell.titleText = TimeframeOption.allCases[indexPath.item].rawValue
+        cell.titleText = TimeframeOptionType.allCases[indexPath.item].rawValue
         
         return cell
     }
@@ -418,7 +464,7 @@ class CurrencyRateCollectionViewCell: UICollectionViewCell, Setuppable, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! TimeframeButtonCollectionViewCell
         
-        currentTimeframeOption = TimeframeOption(rawValue: cell.titleText!)!
+        currentTimeframeOption = TimeframeOptionType(rawValue: cell.titleText!)!
     }
     
     // MARK: - Table view delegate
@@ -431,34 +477,33 @@ class CurrencyRateCollectionViewCell: UICollectionViewCell, Setuppable, UICollec
         let cell = tableView.dequeueReusableCell(withIdentifier: .currencyInfoCellReuseIdentifier, for: indexPath) as! CurrencyInfoTableViewCell
         cell.setupInstance()
         
-        let style = NSMutableParagraphStyle()
-        style.alignment = .right
-        
         cell.contentView.backgroundColor = .currencyInfoBackgroundColor
-        cell.titleLabel.attributedText = NSAttributedString(string: .currencyInfoCellTitleString, attributes: [.font: UIFont.currencyInfoCellTitleFont, .foregroundColor: UIColor.currencyInfoCellTitleColor])
-        cell.valueLabel.attributedText = NSAttributedString(string: .currencyInfoCellValueString, attributes: [.font: UIFont.currencyInfoCellValueFont, .foregroundColor: UIColor.currencyInfoCellValueColor, .paragraphStyle: style])
+        
+        if cell.titleLabel.attributedText == nil && cell.valueLabel.attributedText == nil {
+            arrayOfClearDataPublishers[indexPath.row]
+                .map { doubleValue in
+                    let string = String(doubleValue)
+                    
+                    let style = NSMutableParagraphStyle()
+                    style.alignment = .right
+                    
+                    return NSAttributedString(string: string, attributes: [
+                        .font: UIFont.currencyInfoCellValueFont,
+                        .foregroundColor: UIColor.currencyInfoCellValueColor,
+                        .paragraphStyle: style
+                    ])
+                }
+                .receive(on: RunLoop.main)
+                .assign(to: \.attributedText, on: cell.valueLabel)
+                .store(in: &cancellableSet)
+            
+            cell.titleLabel.attributedText = NSAttributedString(string: arrayOfPublisherNames[indexPath.row], attributes: [
+                .font: UIFont.currencyInfoCellTitleFont,
+                .foregroundColor: UIColor.currencyInfoCellTitleColor
+            ])
+        }
         
         return cell
-    }
-    
-    // MARK: - Scatter plot data source
-    
-    func numberOfRecords(for plot: CPTPlot) -> UInt {
-        return UInt(100) // temporary
-    }
-
-    func number(for plot: CPTPlot, field fieldEnum: UInt, record idx: UInt) -> Any? {
-        let plotField = CPTScatterPlotField(rawValue: Int(fieldEnum))! // in fact bridging step from ObjC enum to Swift enum
-        
-        switch plotField {
-        case .X:
-            return idx
-        case .Y:
-            return idx // temporary
-        default:
-            print("Unknown CPTScatterPlotField case (rawValue: \(fieldEnum)) passed to call \(#function), \(NSString(#file).lastPathComponent):\(#line)")
-            return UInt(0)
-        }
     }
 }
 
@@ -475,7 +520,7 @@ fileprivate extension CGFloat {
     
     // MARK: Graph hosting view constants
     static let graphPaddingTop: CGFloat = 0.0
-    static let graphPaddingRight: CGFloat = -5.0
+    static let graphPaddingRight: CGFloat = 0.0
     static let graphPaddingBottom: CGFloat = 0.0
     static let graphPaddingLeft: CGFloat = 0.0
     
@@ -483,7 +528,7 @@ fileprivate extension CGFloat {
     static let areaBaseValue: CGFloat = 0.0
     
     // MARK: Currency change indicator shape constants
-    static let currencyChangeIndicatorShapeCornerRadius: CGFloat = .currencyChangeIndicatorLabelHeightAnchorValue / 2
+    static let currencyChangeIndicatorShapeCornerRadius: CGFloat = 14.5
     
     // MARK: Table view constants
     static let tableViewSeparatorInsetTopValue: CGFloat = 0.0
@@ -532,7 +577,6 @@ fileprivate extension CGFloat {
     static let currencyChangeIndicatorLabelTopAnchorValue: CGFloat = 19.0
     static let currencyChangeIndicatorLabelBottomAnchorValue: CGFloat = -19.0
     static let currencyChangeIndicatorLabelTrailingAnchorValue: CGFloat = -16.0
-    static let currencyChangeIndicatorLabelHeightAnchorValue: CGFloat = 29.0
     
     static let currencyChangeIndicatorShapeFirstBaselineAnchorValue: CGFloat = -10.0
     static let currencyChangeIndicatorShapeCenterYAnchorValue: CGFloat = 0.0
@@ -558,9 +602,9 @@ fileprivate extension CGFloat {
 fileprivate extension Double {
     // MARK: Graph hosting view constants
     static let graphXAxisMinValue = 0.0
-    static let graphXAxisMaxValue = 100.0
+    static let graphXAxisMaxValue = 30.0
     static let graphYAxisMinValue = 0.0
-    static let graphYAxisMaxValue = 100.0
+    static let graphYAxisMaxValue = 175.0
 }
 
 fileprivate extension UIFont {
@@ -574,7 +618,7 @@ fileprivate extension UIFont {
     
     // MARK: Currency info cell fonts
     static let currencyInfoCellTitleFont = UIFont.systemFont(ofSize: .currencyInfoCellTitleFontSize, weight: .medium)
-    static let currencyInfoCellValueFont = UIFont.systemFont(ofSize: .currencyInfoCellValueFontSize, weight: .semibold)
+    static let currencyInfoCellValueFont = UIFont.systemFont(ofSize: .currencyInfoCellValueFontSize, weight: .medium)
 }
 
 fileprivate extension UIColor {
@@ -590,12 +634,13 @@ fileprivate extension UIColor {
     // MARK: Background colors
     static let currencyTitleTextViewBackgroundColor = UIColor.clear
     static let currencyChangeIndicatorContainerViewBackgroundColor = UIColor.white.withAlphaComponent(0.055)
-    static let currencyChangeIndicatorShapeBackgroundColor = UIColor(hex: "72B637")!
+    static let currencyChangeIndicatorShapeRedBackgroundColor = UIColor(hex: "BA4B2C")!
+    static let currencyChangeIndicatorShapeGreenBackgroundColor = UIColor(hex: "72B637")!
     static let currencyInfoBackgroundColor = UIColor(hex: "05060A")!
     
     // MARK: Currency info cell colors
     static let currencyInfoCellTitleColor = UIColor(hex: "434650")!
-    static let currencyInfoCellValueColor = UIColor(hex: "56BA2E")!
+    static let currencyInfoCellValueColor = UIColor.white
 }
 
 fileprivate extension String {
@@ -603,15 +648,6 @@ fileprivate extension String {
     static let currencyInfoCellReuseIdentifier = String(describing: CurrencyInfoTableViewCell.self)
     static let timeframeButtonCellReuseIdentifier = String(describing: TimeframeButtonCollectionViewCell.self)
     
-    // MARK: Currency title strings (TEMPORARY)
-    static let currencyNameString = "Bitcoin"
-    static let currencyPriceString = "$6.564,30"
-    static let spaceBetweenTexts = "\n"
-    
-    // MARK: Currency change strings (TEMPORARY)
-    static let currencyChangeIndicatorLabelString = "7.12 %"
-    
-    // MARK: Currency info strings (TEMPORARY)
-    static let currencyInfoCellTitleString = "Market Cap"
-    static let currencyInfoCellValueString = "+%24,95"
+    // MARK: Icon names
+    static let bitcoinIconName = "Bitcoin Icon"
 }

@@ -6,8 +6,6 @@
 //  Copyright © 2020 Ostap Tyvonovych. All rights reserved.
 //
 
-import Foundation
-
 protocol Setuppable {
     func setupInstance()
 }

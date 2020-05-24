@@ -144,7 +144,7 @@ class CurrencyRateViewController: UIViewController, UICollectionViewDataSource, 
     // MARK: - Corresponding to button taps
     
     @objc private func addCurrencyBarButtonTapped(_ sender: UIBarButtonItem) {
-        
+        print("Plus button pressed.")
     }
     
     // MARK: - Collection view data source methods
@@ -154,11 +154,8 @@ class CurrencyRateViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: .collectionViewCellReuseIdentifier, for: indexPath)
-        
-        if let setuppableCell = cell as? Setuppable {
-            setuppableCell.setupInstance()
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: .collectionViewCellReuseIdentifier, for: indexPath) as! CurrencyRateCollectionViewCell
+        cell.setupInstance()
         
         return cell
     }
