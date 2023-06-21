@@ -20,6 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                
                self.window = window
            }
-       }
+    }
 }
 

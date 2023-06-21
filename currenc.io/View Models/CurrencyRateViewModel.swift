@@ -54,7 +54,7 @@ final class CurrencyRateViewModel: Setuppable {
     
     func setupInstance() {
         currencyDownloader.setupInstance()
-
+        
         highPricePublisher = self.currencyDownloader.modelDataSubject
             .map { (model: CandlestickDataModel) in
                 return model.high?.last ?? Double.zero

@@ -18,7 +18,7 @@ class CurrencyDataDownloader: Setuppable {
     
     private let urlArgumentsDictionary = [
         "token": "bq2q9avrh5rfg81l7ch0",
-        "symbol": "BINANCE:BTCUSDT"//"OANDA:GBP_USD",
+        "symbol": "OANDA:GBP_USD"//"BINANCE:BTCUSDT"//
     ]
     
 //    OANDA:GBP_USD
